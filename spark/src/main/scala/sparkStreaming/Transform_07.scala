@@ -13,7 +13,9 @@ object Transform_07 {
     val ssc = new StreamingContext(sparkConf,Seconds(3))
 
     //监听端口
-    val socketDStream: ReceiverInputDStream[String] = ssc.socketTextStream("hadoop102",9999)
+    val socketDStream: ReceiverInputDStream[String] = ssc.socketTextStream("localhost",9999)
+
+    socketDStream.print()
 
     //切割
     val word: DStream[String] = socketDStream.flatMap(_.split(" "))
@@ -25,7 +27,7 @@ object Transform_07 {
     val reslut: DStream[(String, Int)] = word2one.reduceByKey(_+_)
 
     //打印
-    reslut.print()
+    //reslut.print()
 
     //启动
     ssc.start()

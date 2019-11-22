@@ -24,6 +24,7 @@
         <module>juc</module>
         <module>git</module>
         <module>dataStore_readtime</module>
+        <module>io</module>
     </modules>
 
     <build>

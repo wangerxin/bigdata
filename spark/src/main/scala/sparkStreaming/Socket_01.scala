@@ -11,9 +11,9 @@ object Socket_01 {
 
     val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("socket")
 
-    val ssc = new StreamingContext(sparkConf,Seconds(5))
+    val ssc = new StreamingContext(sparkConf,Seconds(2))
 
-    val socketDStream: ReceiverInputDStream[String] = ssc.socketTextStream("hadoop102",9999)
+    val socketDStream: ReceiverInputDStream[String] = ssc.socketTextStream("10.110.82.255",22222)
 
     val word: DStream[String] = socketDStream.flatMap(_.split(" "))
 

@@ -1,3 +1,4 @@
+/*
 package offsetMySQL
 
 import kafka.common.TopicAndPartition
@@ -83,3 +84,4 @@ object StreamingOffsetMySQL {
     ssc.awaitTermination()
   }
 }
+*/

@@ -9,7 +9,6 @@ object RedisUtil {
   def getJedisClient: Jedis = {
 
     if(jedisPool==null){
-
       // 配置
       val jedisPoolConfig = new JedisPoolConfig()
       jedisPoolConfig.setMaxTotal(1000)  //最大连接数
@@ -23,7 +22,6 @@ object RedisUtil {
       val redisHost = ConfigurationUtil.getValueFromConfig("redis.host")
       val redisPort = ConfigurationUtil.getValueFromConfig("redis.port")
       jedisPool=new JedisPool(jedisPoolConfig,redisHost,redisPort.toInt)
-
     }
 
     // 返回一个jedis

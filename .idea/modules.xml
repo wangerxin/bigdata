@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/azkaban/azkaban.iml" filepath="$PROJECT_DIR$/azkaban/azkaban.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bigdata.iml" filepath="$PROJECT_DIR$/bigdata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ctproject/ctcommon/ct-common.iml" filepath="$PROJECT_DIR$/ctproject/ctcommon/ct-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ctproject/ctproducer/ct-producer.iml" filepath="$PROJECT_DIR$/ctproject/ctproducer/ct-producer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ctproject/ct-project.iml" filepath="$PROJECT_DIR$/ctproject/ct-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataStore_readtime/dataStore_readtime.iml" filepath="$PROJECT_DIR$/dataStore_readtime/dataStore_readtime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flume/flume.iml" filepath="$PROJECT_DIR$/flume/flume.iml" />
+      <module fileurl="file://$PROJECT_DIR$/git/git.iml" filepath="$PROJECT_DIR$/git/git.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataStore_readtime/gmall1111-common/gmall1111-common.iml" filepath="$PROJECT_DIR$/dataStore_readtime/gmall1111-common/gmall1111-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataStore_readtime/gmall1111-logger/gmall1111-logger.iml" filepath="$PROJECT_DIR$/dataStore_readtime/gmall1111-logger/gmall1111-logger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataStore_readtime/gmall1111-mock/gmall1111-mock.iml" filepath="$PROJECT_DIR$/dataStore_readtime/gmall1111-mock/gmall1111-mock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hbase/hbase.iml" filepath="$PROJECT_DIR$/hbase/hbase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hive/hive.iml" filepath="$PROJECT_DIR$/hive/hive.iml" />
+      <module fileurl="file://$PROJECT_DIR$/io/io.iml" filepath="$PROJECT_DIR$/io/io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/juc/juc.iml" filepath="$PROJECT_DIR$/juc/juc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka/kafka.iml" filepath="$PROJECT_DIR$/kafka/kafka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kylin/kylin.iml" filepath="$PROJECT_DIR$/kylin/kylin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mapreduce/mapreduce.iml" filepath="$PROJECT_DIR$/mapreduce/mapreduce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/python/python.iml" filepath="$PROJECT_DIR$/python/python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/python3/python3.iml" filepath="$PROJECT_DIR$/python3/python3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scala/scala.iml" filepath="$PROJECT_DIR$/scala/scala.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark/spark.iml" filepath="$PROJECT_DIR$/spark/spark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkmall/sparkmall-common/sparkmall-common.iml" filepath="$PROJECT_DIR$/sparkmall/sparkmall-common/sparkmall-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkmall/sparkmall-notonline/sparkmall-offline.iml" filepath="$PROJECT_DIR$/sparkmall/sparkmall-notonline/sparkmall-offline.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkmall/sparkmall-online/sparkmall-online.iml" filepath="$PROJECT_DIR$/sparkmall/sparkmall-online/sparkmall-online.iml" />
+      <module fileurl="file://$PROJECT_DIR$/work/work.iml" filepath="$PROJECT_DIR$/work/work.iml" />
+    </modules>
+  </component>
+</project>

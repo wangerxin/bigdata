@@ -18,11 +18,11 @@ public class CustomLowerConsumer {
 
         //1.参数信息
         ArrayList<String> brokers = new ArrayList<String>();
-        brokers.add("hadoop102");
-        brokers.add("hadoop103");
-        brokers.add("hadoop104");
+        brokers.add("10.110.83.34");
+        brokers.add("10.110.83.35");
+        brokers.add("10.110.83.36");
         int port = 9092;//连接kafka集群的端口号
-        String topic = "first";//待消费的主题
+        String topic = "events_server_topic";//待消费的主题
         int partition = 0;//待消费的分区
         long offset = 0;//待消费的位置信息
 
@@ -31,6 +31,8 @@ public class CustomLowerConsumer {
 
         //3.从指定的offset
         getData(leader, port, topic, partition, offset);
+
+
     }
 
     //获取某个partiton的leader主机名

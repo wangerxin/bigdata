@@ -1,6 +1,6 @@
 package offsetMySQL
 
-import com.typesafe.config.ConfigFactory
+/*import com.typesafe.config.ConfigFactory
 import org.apache.commons.lang3.StringUtils
 
 object ConfigUtil {
@@ -16,4 +16,4 @@ object ConfigUtil {
     }
   }
 
-}
+}*/
