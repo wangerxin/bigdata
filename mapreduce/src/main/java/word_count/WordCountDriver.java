@@ -18,8 +18,8 @@ public class WordCountDriver {
         //1.创建job
         Configuration configuration = new Configuration();
         Job job = Job.getInstance(configuration);
-        //2.封装类
-        job.setMapperClass(WordCountMapper.class);
+        //2.设置3个类
+       job.setMapperClass(WordCountMapper.class);
         job.setReducerClass(WordCountReduce.class);
         job.setJarByClass(WordCountDriver.class);
         //3.设置输出类型
@@ -28,8 +28,8 @@ public class WordCountDriver {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         //4.设置输入输出路径
-        FileInputFormat.setInputPaths(job,new Path("e:/xxx"));
-        FileOutputFormat.setOutputPath(job,new Path("e/xxx"));
+        FileInputFormat.setInputPaths(job,new Path("hdfs://hadoop102:9000/wcinput"));
+        FileOutputFormat.setOutputPath(job,new Path("hdfs://hadoop102:9000/output"));
         //5.提交
         boolean result = job.waitForCompletion(true);
         System.out.println("运行结束");
