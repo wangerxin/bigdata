@@ -15,13 +15,24 @@ import org.apache.orc.mapreduce.OrcOutputFormat;
 import java.io.IOException;
 
 // https://www.2cto.com/net/201607/531847.html
+
+/**
+ * CREATE TABLE `meeresult`(
+ `msisdn_1` string,
+ `msimsi_1` string,
+ `msimei_1` string,
+ `geohash6` string,
+ `start_time` bigint,
+ `stay_time` bigint)
+ hadoop jar xxx.jar input output
+
+ */
 public class Mee2Driver {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
          // 创建job
          Configuration conf = new Configuration();
-         //conf.set("mapreduce.framework.name", "local");
          conf.set("orc.mapred.output.schema",
                  "struct<msisdn_1:string," +
                          "msimsi_1:string," +
@@ -30,7 +41,7 @@ public class Mee2Driver {
                          "start_time:bigint," +
                          "stay_time:bigint>");
          Job job = Job.getInstance(conf);
-         //job.setNumReduceTasks(1);
+         job.setNumReduceTasks(1);
 
          // 设置3个jar
          job.setJarByClass(Mee2Driver.class);

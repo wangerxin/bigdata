@@ -13,6 +13,13 @@ public class Mee2Mapper extends Mapper<NullWritable, OrcStruct, Text, LongWritab
     Text k = new Text();
     LongWritable v = new LongWritable();
 
+    String msisdn_1 = null;
+    String msimsi_1 = null;
+    String msimei_1 = null;
+    String geohash6 = null;
+    Long capture_time = 0L;
+
+
     @Override
     protected void map(NullWritable key, OrcStruct value, Context context) throws IOException, InterruptedException {
 
@@ -23,6 +30,7 @@ public class Mee2Mapper extends Mapper<NullWritable, OrcStruct, Text, LongWritab
          48: geohash6
          0: capture_time
          */
+
         k.set(value.getFieldValue(0).toString() + "&" +
                 value.getFieldValue(1).toString() + "&" +
                 value.getFieldValue(2).toString() + "&" +
