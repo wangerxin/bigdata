@@ -1,0 +1,82 @@
+测试目的: table与--as-parquetfile是否可以同时使用
+/opt/module/sqoop1.4.7/bin/sqoop import \
+--connect jdbc:mysql://192.168.25.1:3306/gmall \
+--username root \
+--password 235236 \
+--table base_category1 \
+--target-dir  hdfs://hadoop102:9000/user/hive/warehouse/gmall.db/ods_base_category1/test \
+--delete-target-dir \
+--num-mappers 1 \
+--as-parquetfile
+结果:可以
+可能异常: --target-dir的值必须是合格的URL,否则org.kitesdk.data.ValidationException: Dataset name dt=test is not alphanumeric (plus '_')
+解决方案: 1.设置target-dir为合法URL
+          2.先将数据导入到HDFS某个路径下,然后mv到仓库路径下面
+
+测试目的: query与--as-parquetfile是否可以同时使用
+/opt/module/sqoop1.4.7/bin/sqoop import \
+--connect jdbc:mysql://192.168.25.1:3306/gmall \
+--username root \
+--password 235236 \
+--query "select * from base_category1 where \$CONDITIONS;" \
+--target-dir  hdfs://hadoop102:9000/user/hive/warehouse/gmall.db/ods_base_category1/test22 \
+--delete-target-dir \
+--num-mappers 1 \
+--as-parquetfile
+结果:可以
+可能异常: --target-dir的值必须是合格的URL,否则org.kitesdk.data.ValidationException: Dataset name dt=test is not alphanumeric (plus '_')
+解决方案: 1.设置target-dir为合法URL
+          2.先将数据导入到HDFS某个路径下,然后mv到仓库路径下面
+
+测试目的: mysql数据类型为(date,time,datetime,timestamp,year),hive数据类型为(日期时间类型设置为string),导入为parquetfile是否可查
+/opt/module/sqoop1.4.7/bin/sqoop import \
+--connect jdbc:mysql://192.168.25.1:3306/test_sqoop \
+--username root \
+--password 235236 \
+--query "select * from type_test where \$CONDITIONS;" \
+--target-dir  hdfs://hadoop102:9000/user/hive/warehouse/test_sqoop.db/test_date/test \
+--delete-target-dir \
+--num-mappers 1 \
+--as-parquetfile
+结果: 查出来是null
+查无数据,与parquet格式有关,https://blog.csdn.net/weixin_42496757/article/details/88096925
+解决思路:
+1.添加参数:
+--map-column-java date_=java.sql.Date \
+--map-column-hive date_=String \
+结果: ERROR tool.ImportTool: Import failed: Cannot convert to AVRO type java.sql.Date
+2.转为字符串
+/opt/module/sqoop1.4.7/bin/sqoop import \
+--connect jdbc:mysql://192.168.25.1:3306/test_sqoop \
+--username root \
+--password 235236 \
+--query "select date_format(datetime_,'%Y-%m-%d %H:%i:%s') datetime_,date_format(time_,'%H:%i:%s') time_,date_format(date_,'%Y-%m-%d') date_,date_format(timestamp_,'%Y-%m-%d %H:%i:%s') timestamp_,date_format(year_,'%Y') year_ from type_test where \$CONDITIONS;" \
+--target-dir  hdfs://hadoop102:9000/user/temp/test_date_parquet \
+--delete-target-dir \
+--num-mappers 1 \
+--as-parquetfile
+结果: 成功
+注意事项: 设置别名
++------------------------------+--------------------------+--------------------------+-------------------------------+--------------------------+--+
+| test_date_parquet.datetime_  | test_date_parquet.time_  | test_date_parquet.date_  | test_date_parquet.timestamp_  | test_date_parquet.year_  |
++------------------------------+--------------------------+--------------------------+-------------------------------+--------------------------+--+
+| 2020-12-12 12:12:12          | 12:12:12                 | 2020-12-12               | 2020-12-12 12:12:12           | NULL                     |
++------------------------------+--------------------------+--------------------------+-------------------------------+--------------------------+--+
+
+测试目的: 测试目的: mysql(date,time,datetime,timestamp,year),hive(日期时间类型设置为bigint)导入为parquetfile是否可查
+/opt/module/sqoop1.4.7/bin/sqoop import \
+--connect jdbc:mysql://192.168.25.1:3306/test_sqoop \
+--username root \
+--password 235236 \
+--query "select * from type_test where \$CONDITIONS;" \
+--target-dir  hdfs://hadoop102:9000/tmp/test_date_parquet_bigint \
+--delete-target-dir \
+--num-mappers 1 \
+--as-parquetfile
+结果: 可以查出来,但是是时间戳
+查无数据,与parquet格式有关,https://blog.csdn.net/weixin_42496757/article/details/88096925
++-------------------------------------+---------------------------------+---------------------------------+--------------------------------------+---------------------------------+--+
+| test_date_parquet_bigint.datetime_  | test_date_parquet_bigint.time_  | test_date_parquet_bigint.date_  | test_date_parquet_bigint.timestamp_  | test_date_parquet_bigint.year_  |
++-------------------------------------+---------------------------------+---------------------------------+--------------------------------------+---------------------------------+--+
+| 1607746332000                       | 15132000                        | 1607702400000                   | 1607746332000                        | 2020                            |
++-------------------------------------+---------------------------------+---------------------------------+--------------------------------------+---------------------------------+--+

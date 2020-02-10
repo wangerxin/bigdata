@@ -27,9 +27,16 @@ df1 = pd.DataFrame(list1,columns=["a","b","c"])
 # df = df1.groupby("a").agg({"b":"max","c":"min"})
 
 
-# 3.groupby之后可以进行transform操作,把结果作用在新的一列,数据条数不变
+# 3.groupby之后可以进行transform操作,把结果作用在新的一列,数据条数不变,类似hql中的开窗
 df1["d"] = df1.groupby("a")["b"].transform("max")
-print(df1)
+
+def test(data):
+    print(type(data))
+    print(data[0])
+
+print(test((1,2)))
+
+# 4.groupby之后也可以apply
 
 
 

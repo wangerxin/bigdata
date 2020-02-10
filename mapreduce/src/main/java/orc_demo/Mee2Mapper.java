@@ -9,7 +9,9 @@ import org.apache.orc.mapred.OrcStruct;
 import javax.xml.bind.ValidationEvent;
 import java.io.IOException;
 
-public class Mee2Mapper extends Mapper<NullWritable, OrcStruct, Text, LongWritable> {
+public class
+
+Mee2Mapper extends Mapper<NullWritable, OrcStruct, Text, LongWritable> {
     Text k = new Text();
     LongWritable v = new LongWritable();
 

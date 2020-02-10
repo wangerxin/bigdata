@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
+            <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
             <version>2.1.1</version>
         </dependency>
         <dependency>
@@ -61,6 +61,23 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-yarn_2.11</artifactId>
             <version>2.1.1</version>
+        </dependency>
+        <!--scala语言的jdbc操作-->
+        <dependency>
+            <groupId>org.scalikejdbc</groupId>
+            <artifactId>scalikejdbc_2.11</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kudu</groupId>
+            <artifactId>kudu-client</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.kudu/kudu-spark2 -->
+        <dependency>
+            <groupId>org.apache.kudu</groupId>
+            <artifactId>kudu-spark2_2.11</artifactId>
+            <version>1.7.0</version>
         </dependency>
     </dependencies>
 

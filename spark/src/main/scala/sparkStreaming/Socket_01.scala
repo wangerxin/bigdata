@@ -26,5 +26,4 @@ object Socket_01 {
     ssc.start()
     ssc.awaitTermination()
   }
-
 }

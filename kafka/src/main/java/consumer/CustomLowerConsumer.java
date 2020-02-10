@@ -22,7 +22,7 @@ public class CustomLowerConsumer {
         brokers.add("hadoop103");
         brokers.add("hadoop104");
         int port = 9092;//连接kafka集群的端口号
-        String topic = "first";//待消费的主题
+        String topic = "kafka2kudu2";//待消费的主题
         int partition = 0;//待消费的分区
         long offset = 0;//待消费的位置信息
 

@@ -10,7 +10,7 @@ public class TestProducer {
 
         //1.配置
         Properties props = new Properties();
-        props.put("bootstrap.servers", "hadoop102:9092");
+        props.put("bootstrap.servers", "192.168.1.102:9092");
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
@@ -26,7 +26,7 @@ public class TestProducer {
 
             //3.发送数据
             //3.1 封装数据
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>("first", Integer.toString(i), Integer.toString(i));
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>("spark2kudu2", Integer.toString(i), Integer.toString(i));
             //3.2 发送数据,并且回调
             producer.send(producerRecord, new Callback() {
                 public void onCompletion(RecordMetadata metadata, Exception exception) {
@@ -36,7 +36,6 @@ public class TestProducer {
                 }
             });
         }
-
         //4.关闭资源,刷写数据
         producer.close();
     }

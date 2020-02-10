@@ -6,5 +6,8 @@ object ListTest {
 
     val list: List[Int] = List(1,2,3)
     println(list.sum)
+
+    val add = ()=> println("aa")
+    add
   }
 }

@@ -22,7 +22,5 @@ object BroadCastTest {
         println(bc.value + x)
       }
     }
-
   }
-
 }

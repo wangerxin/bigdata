@@ -1,0 +1,35 @@
+测试目的: mysql(date,time,datetime,timestamp,year),hive(日期时间类型设置为string)导入为textfile是否可查
+/opt/module/sqoop1.4.7/bin/sqoop import \
+--connect jdbc:mysql://192.168.25.1:3306/test_sqoop \
+--username root \
+--password 235236 \
+--query "select * from type_test where \$CONDITIONS;" \
+--target-dir  hdfs://hadoop102:9000/user/hive/warehouse/test_sqoop.db/test_date_test \
+--delete-target-dir \
+--fields-terminated-by "\001" \
+--null-string '\\N' \
+--null-non-string '\\N' \
+--num-mappers 1
+# 结果: 可查,但是后面多了零
++---------------------------+-----------------------+-----------------------+----------------------------+-----------------------+--+
+| test_date_test.datetime_  | test_date_test.time_  | test_date_test.date_  | test_date_test.timestamp_  | test_date_test.year_  |
++---------------------------+-----------------------+-----------------------+----------------------------+-----------------------+--+
+| 2020-12-12 12:12:12.0     | 12:12:12              | 2020-12-12            | 2020-12-12 12:12:12.0      | 2020                  |
++---------------------------+-----------------------+-----------------------+----------------------------+-----------------------+--+
+
+ 测试目的: 针对上面的测试,是否可以消除多余的0
+/opt/module/sqoop1.4.7/bin/sqoop import \
+--connect jdbc:mysql://192.168.25.1:3306/test_sqoop \
+--username root \
+--password 235236 \
+--query "select date_format(datetime_,'%Y-%m-%d %H:%i:%s'),time_,date_,date_format(timestamp_,'%Y-%m-%d %H:%i:%s'),year_ from type_test where \$CONDITIONS;" \
+--target-dir  hdfs://hadoop102:9000/user/hive/warehouse/test_sqoop.db/test_date_text \
+--delete-target-dir \
+--fields-terminated-by "\001" \
+--num-mappers 1
+结果: 可以通过在query语句中使用date_format()函数消除datetime类型多余的0,但是不能消除timestamp类型的0
++---------------------------+-----------------------+-----------------------+----------------------------+-----------------------+--+
+| test_date_text.datetime_  | test_date_text.time_  | test_date_text.date_  | test_date_text.timestamp_  | test_date_text.year_  |
++---------------------------+-----------------------+-----------------------+----------------------------+-----------------------+--+
+| 2020-12-12 12:12:12       | 12:12:12              | 2020-12-12            | 2020-12-12 12:12:12.0      | 2020                  |
++---------------------------+-----------------------+-----------------------+----------------------------+-----------------------+--+

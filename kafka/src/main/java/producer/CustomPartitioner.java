@@ -9,7 +9,7 @@ public class CustomPartitioner implements Partitioner {
 
     //生产者发送数据到0分区
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-        return 1;
+        return 0;
     }
 
     public void close() {

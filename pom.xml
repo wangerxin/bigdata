@@ -24,6 +24,12 @@
         <module>juc</module>
         <module>git</module>
         <module>dataStore_readtime</module>
+        <module>data-struct</module>
+        <module>redis</module>
+        <module>java</module>
+        <module>kudu</module>
+        <module>commom</module>
+        <module>sqoop</module>
     </modules>
 
     <build>

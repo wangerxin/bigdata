@@ -38,8 +38,7 @@ object AD {
     reslut.map{
       case (key,value) => (Integer.parseInt(key),value)
     }.sortByKey().foreach(println(_))
-
-
   }
+
 
 }

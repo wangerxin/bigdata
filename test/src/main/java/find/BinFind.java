@@ -1,17 +1,33 @@
 package find;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class BinFind {
 
     public static void main(String[] args) {
 
-        int[] arr = {1,2,4,5,7,9};
-        System.out.println(binFind(arr, 0, arr.length-1, 9));
+        int[] arr = {1, 1, 1, 1, 1, 1};
+        System.out.println(binFind(arr, 0, arr.length - 1, 1));
+
+
     }
 
-    // 二分查找
+
+    /**
+     * 二分查找, 查找指定数据所在的位置
+     *
+     * @param arr
+     * @param start
+     * @param end
+     * @param key
+     * @return
+     */
     public static int binFind(int[] arr, int start, int end, int key) {
 
-        //简单校验
+        //校验, 防止数据不在数组中
         if (key < arr[start] || key > arr[end]) {
             return -1;
         }

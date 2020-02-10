@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class HbaseToHbaseMapper extends TableMapper<ImmutableBytesWritable, Put> {
 
+
     @Override
     protected void map(ImmutableBytesWritable key, Result value, Context context) throws IOException, InterruptedException {
 
