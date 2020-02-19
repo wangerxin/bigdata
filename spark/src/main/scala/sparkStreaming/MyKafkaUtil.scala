@@ -11,6 +11,7 @@ import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, Loca
 object MyKafkaUtil {
 
   // kafka消费者配置
+  // 基本配置：1.kafka地址 2.groupid，3.重头取数据还是接着取数据 4.是否自动提交
   val kafkaParam = Map(
 
     //kafka连接地址

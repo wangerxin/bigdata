@@ -3,7 +3,7 @@ package com.atguigu.gmall1111logger.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.gmall1111_commom.constant.GmallConstant;
+import com.atguigu.gmall1111.commom.constant.GmallConstant;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -30,19 +30,18 @@ public class LoggerController {
 
          //给日志添加服务器时间
          JSONObject jsonObject  = JSON.parseObject(log);
-         jsonObject.put("ts",System.currentTimeMillis()+3600*1000*24 +new Random().nextInt(3600*1000*5));
+         jsonObject.put("ts",System.currentTimeMillis());
          String newLog = jsonObject.toJSONString();
 
-         //根据不同的日志类型发送到不同的kafka的topic
+         //不同的日志发送到不同的kafka的topic ,KafkaTemplate简化了生产者API
          if( "startup".equals(jsonObject.getString("type"))  ){
              kafkaTemplate.send(GmallConstant.KAFKA_TOPIC_STARTUP,newLog);
          }else{
              kafkaTemplate.send(GmallConstant.KAFKA_TOPIC_EVENT,newLog);
          }
 
-         // 写日志到磁盘
+         // 写日志到磁盘，可以作为离线处理
          logger.info(newLog);
           return  "";
       }
-
 }

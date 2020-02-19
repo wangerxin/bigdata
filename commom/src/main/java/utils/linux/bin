@@ -1,0 +1,1 @@
+软连接：ln -s /bin/less /usr/local/bin/less

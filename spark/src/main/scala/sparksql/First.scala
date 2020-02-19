@@ -14,7 +14,7 @@ object First {
       .config(sparkConf)
       .getOrCreate()
     //开启隐式转换
-    import spark.implicits._
+    //import spark.implicits._
 
     //创建DF
     val df1: DataFrame = spark.read.json("input/people_json")

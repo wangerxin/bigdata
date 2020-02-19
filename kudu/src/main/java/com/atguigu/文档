@@ -1,0 +1,8 @@
+一、日志设计：
+event_table: {"event":"start","date_time"："2019-12-12 12:12:12" ...all_column}
+start_table: {"date_time"："2019-12-12 12:12:12" ...olny_start_column}
+
+二、功能：
+1.spark消费kafka数据，写入kudu
+2.kudu分区策略
+3.impala建立视图，关联kudu表和hdfs的parquet文件

@@ -38,7 +38,7 @@ public class LogUploader {
 
 
             //连接服务器
-            URL url  =new URL("http://logserver:80/log");
+            URL url  =new URL("http://logserver:8080/log");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             //--连接配置
@@ -60,7 +60,7 @@ public class LogUploader {
             out.flush();
             out.close();
             int code = conn.getResponseCode();
-            //System.out.println(code); //返回状态码
+            System.out.println(code); //返回状态码
         }
         catch (Exception e){
             e.printStackTrace();

@@ -11,6 +11,9 @@ import java.util.Map;
 
 /**
  * 把日志类型封装在head中
+ * 数据模型： event：一行记录被封装为一个event对象，包含header和body
+ *            header：默认为null
+ *            body：字节数组，可以解析为string
  */
 public class LogTypeInterceptor implements Interceptor {
 

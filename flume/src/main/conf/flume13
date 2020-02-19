@@ -1,0 +1,36 @@
+
+producer.sources = s
+producer.channels = c
+producer.sinks = r
+
+producer.sources.s.type = exec
+producer.sources.s.command=tail -n 0 -F   /opt/module/flume/task/data.txt
+producer.sources.s.deletePolicy=never
+
+# Each channel's type is defined.
+producer.channels.c.type = memory
+producer.channels.c.capacity = 1000000
+producer.channels.c.transactionCapacity = 1000
+#producer.channels.c.type=file
+#producer.channels.c.checkpointDir=/usr/local/flumeng/checkpointdir/tcpdir/example_agent
+#producer.channels.c.dataDirs=/usr/local/flumeng/datadirs/tddirs/example_agen
+#
+producer.sinks.r.type = hdfs
+producer.sinks.r.hdfs.path = hdfs://hadoop102:9000/flume2/%Y-%m-%d
+producer.sinks.r.hdfs.batchSize= 1000
+producer.sinks.r.hdfs.fileType = DataStream
+producer.sinks.r.hdfs.writeFormat =Text
+# 10m
+producer.sinks.r.hdfs.rollSize = 10485760
+producer.sinks.r.hdfs.rollCount = 0
+producer.sinks.r.hdfs.rollInterval = 3600
+producer.sinks.r.hdfs.useLocalTimeStamp = true
+
+#Specify the channel the sink should use
+producer.sinks.r.channel = c
+producer.sources.s.channels = c
+
+# 预期：文件夹按天滚动，文件按照小时或者10M滚动
+# 结果：文件夹按照天滚动，文件按照小时滚动（每小时只有5m）
+
+# 注意：为什么加上了round的参数之后，会产生小文件呢，不解

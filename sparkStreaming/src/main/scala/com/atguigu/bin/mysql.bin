@@ -1,0 +1,8 @@
+ create table kafka_offset(
+        topic varchar(32),
+        groupid varchar(50),
+        partitions int,
+        fromoffset bigint,
+        untiloffset bigint,
+        primary key(topic,groupid,partitions)
+        );

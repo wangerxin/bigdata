@@ -30,6 +30,8 @@
         <module>kudu</module>
         <module>commom</module>
         <module>sqoop</module>
+        <module>sparkStreaming</module>
+        <module>impala</module>
     </modules>
 
     <build>

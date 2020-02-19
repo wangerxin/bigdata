@@ -1,0 +1,33 @@
+producer.sources = s
+producer.channels = c
+producer.sinks = r
+
+producer.sources.s.type = exec
+producer.sources.s.command=tail -n 0 -F   /opt/module/flume/task/data.txt
+producer.sources.s.deletePolicy=never
+
+# Each channel's type is defined.
+producer.channels.c.type = memory
+producer.channels.c.capacity = 1000000
+producer.channels.c.transactionCapacity = 1000
+#producer.channels.c.type=file
+#producer.channels.c.checkpointDir=/usr/local/flumeng/checkpointdir/tcpdir/example_agent
+#producer.channels.c.dataDirs=/usr/local/flumeng/datadirs/tddirs/example_agen
+#
+producer.sinks.r.type = hdfs
+producer.sinks.r.hdfs.path = hdfs://hadoop102:9000/flume/%Y-%m-%d/%H
+producer.sinks.r.hdfs.batchSize= 1000
+producer.sinks.r.hdfs.fileType = DataStream
+producer.sinks.r.hdfs.writeFormat =Text
+# 1m
+producer.sinks.r.hdfs.rollSize = 1048576
+producer.sinks.r.hdfs.rollCount = 0
+producer.sinks.r.hdfs.rollInterval = 1800
+producer.sinks.r.hdfs.useLocalTimeStamp = true
+
+#Specify the channel the sink should use
+producer.sinks.r.channel = c
+producer.sources.s.channels = c
+
+# 预期：文件夹按照小时滚动，文件按照30分钟或者1M滚动
+# 结果：文件夹按照小时滚动，文件按照1M滚动（约20一M）

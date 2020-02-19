@@ -143,7 +143,7 @@ public class JsonMocker {
 
     public static void genLog() {
         JsonMocker jsonMocker = new JsonMocker();
-        jsonMocker.startupNum = 1000000;
+        jsonMocker.startupNum = 100;
         for (int i = 0; i < jsonMocker.startupNum; i++) {
 
             //生产启动日志，并发送到服务器
@@ -157,13 +157,11 @@ public class JsonMocker {
                 jsonMocker.sendLog(eventLog);
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-
     }
 
 
