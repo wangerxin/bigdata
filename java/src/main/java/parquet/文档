@@ -1,0 +1,4 @@
+1.hive测试orc和parquet： https://www.cnblogs.com/wuxiaolong4/p/11809291.html
+  结果：orc的存储效率和查询效率高于parquet。
+
+2.
