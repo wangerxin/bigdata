@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="HydraSettings">
-    <option name="hydraStorePath" value="$PROJECT_DIR$/.hydra/idea" />
+    <option name="hydraStorePath" value="E:\software\IntelliJ IDEA 2018.2.8\project\bigdata\.hydra\idea" />
     <option name="noOfCores" value="2" />
-    <option name="projectRoot" value="$PROJECT_DIR$" />
+    <option name="projectRoot" value="E:\software\IntelliJ IDEA 2018.2.8\project\bigdata" />
     <option name="sourcePartitioner" value="auto" />
   </component>
 </project>

@@ -1,62 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Eclipse" />
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="azkaban" />
         <module name="ct-common" />
         <module name="ct-producer" />
         <module name="flume" />
-        <module name="git" />
         <module name="gmall1111-common" />
         <module name="gmall1111-logger" />
         <module name="gmall1111-mock" />
         <module name="hbase" />
         <module name="hive" />
-        <module name="io" />
-        <module name="juc" />
+        <module name="java_se" />
         <module name="kafka" />
         <module name="kylin" />
         <module name="mapreduce" />
         <module name="scala" />
         <module name="spark" />
-        <module name="sparkmall-common" />
         <module name="sparkmall-offline" />
         <module name="sparkmall-online" />
-        <module name="work" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="azkaban" target="8" />
-      <module name="bigdata" target="8" />
-      <module name="ct-common" target="8" />
-      <module name="ct-producer" target="8" />
-      <module name="ct-project" target="8" />
-      <module name="dataStore_readtime" target="1.8" />
-      <module name="flume" target="8" />
       <module name="git" target="8" />
-      <module name="gmall1111-common" target="1.8" />
-      <module name="gmall1111-logger" target="1.8" />
-      <module name="gmall1111-mock" target="1.8" />
-      <module name="hbase" target="8" />
-      <module name="hive" target="1.8" />
-      <module name="io" target="8" />
       <module name="juc" target="8" />
-      <module name="kafka" target="8" />
-      <module name="kylin" target="8" />
-      <module name="mapreduce" target="1.8" />
-      <module name="scala" target="8" />
-      <module name="spark" target="8" />
-      <module name="sparkmall" target="1.8" />
-      <module name="sparkmall-common" target="1.8" />
-      <module name="sparkmall-offline" target="1.8" />
-      <module name="sparkmall-online" target="1.8" />
-      <module name="test" target="8" />
-      <module name="work" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
