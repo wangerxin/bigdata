@@ -1,43 +1,84 @@
 package producer;
 
-
-import org.apache.kafka.clients.producer.*;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.Properties;
+import java.util.Random;
+import java.util.UUID;
 
+/**
+0.9.0版本连接kafka集群推荐使用bootstrap.servers，如果使用zookeeper则元数据保存在zookeeper。
+ */
 public class TestProducer {
-    public static void main(String[] args) {
+    private String bootstrapServers;
+    private String producerAcks;
+    private Integer kafkaProducerRetries;
+    private Integer batchSize;
+    private Integer lingerMs;
+    private Integer bufferMemory;
+    private String topic;
 
-        //1.配置
-        Properties props = new Properties();
-        props.put("bootstrap.servers", "hadoop102:9092");
-        props.put("acks", "all");
-        props.put("retries", 0);
-        props.put("batch.size", 16384);
-        props.put("linger.ms", 1);
-        props.put("buffer.memory", 33554432);
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("partitioner.class", "producer.CustomPartitioner");
+    public void producer() {
+        this.bootstrapServers = "10.1.20.25:9092,10.1.20.26:9092,10.1.20.27:9092,10.1.20.28:9092,10.1.20.29:9092,10.1.20.30:9092";
+        this.batchSize = 16348;
+        this.lingerMs = 0;
+        this.producerAcks = "all";
+        this.bufferMemory = 33554432;
+        this.kafkaProducerRetries = 1;
+        Properties properties = new Properties();
+        properties.put("bootstrap.servers", this.bootstrapServers);
+        properties.put("acks", this.producerAcks);
+        properties.put("retries", this.kafkaProducerRetries);
+        properties.put("batch.size", this.batchSize);
+        properties.put("linger.ms", this.lingerMs);
+        properties.put("buffer.memory", this.bufferMemory);
+        properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(properties);
 
-        //2.创建生产者
-        Producer<String, String> producer = new KafkaProducer<String, String>(props);
-        for (int i = 0; i < 10; i++) {
+        JSONObject json = new JSONObject(16);
+        ProducerRecord<String,String> producerRecord = null;
+        String topic = "test_wex";
+        json.put("user_id", new Random().nextInt(5) + 1);
+        //json.put("item_id", 31000);
+        //json.put("category_id", 41000);
+        //json.put("behavior", "order");
+        json.put("ts", "a\nb\rc\td");
+        String jsonStr = json.toJSONString();
+        String keyWord = UUID.randomUUID().toString();
+        System.out.println(jsonStr);
+        producerRecord = new ProducerRecord(topic, null, System.currentTimeMillis(), keyWord, jsonStr);
 
-            //3.发送数据
-            //3.1 封装数据
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>("first", Integer.toString(i), Integer.toString(i));
-            //3.2 发送数据,并且回调
-            producer.send(producerRecord, new Callback() {
-                public void onCompletion(RecordMetadata metadata, Exception exception) {
-                    if (metadata !=null){
-                        System.out.println(metadata.topic()+"-"+metadata.partition()+"-"+metadata.offset());
-                    }
+        if (true) {
+
+            kafkaProducer.send(producerRecord, (metadata, exception) -> {
+                if (exception != null) {
+                    exception.printStackTrace();
+                } else {
                 }
             });
-        }
 
-        //4.关闭资源,刷写数据
-        producer.close();
+        } else {
+            try {
+                RecordMetadata recordMetadata = kafkaProducer.send(producerRecord).get();
+                System.out.println("offset:" + recordMetadata.offset());
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        kafkaProducer.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        TestProducer testProducer = new TestProducer();
+
+        for (int i = 0; i < 1000; i++) {
+            Thread.sleep(2000);
+            testProducer.producer();
+        }
     }
 }

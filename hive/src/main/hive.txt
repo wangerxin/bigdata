@@ -1,0 +1,7 @@
+# 动态分区
+set hive.exec.dynamici.partition=true;
+set hive.exec.dynamic.partition.mode=nonstrict;
+
+# select删除部分字段
+set hive.support.quoted.identifiers=None;
+select `(name|id|pwd)?+.+` from tableName;
